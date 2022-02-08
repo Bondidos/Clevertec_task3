@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">Clevertec_task1</string>
-    <string name="hello">Hello World!</string>
+    <string name="app_name">Clevertec_task2</string>
+    <string name="hello" translatable="false">Hello World!</string>
 </resources>
