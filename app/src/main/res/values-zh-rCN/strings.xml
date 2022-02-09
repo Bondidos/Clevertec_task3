@@ -2,4 +2,7 @@
 <resources>
     <string name="app_name">Clevertec_task1</string>
     <string name="hello">你好世界!</string>
+    <string name="are_you_sure_want_to_exit">您确定要退出吗？</string>
+    <string name="yes">是的</string>
+    <string name="no">不</string>
 </resources>

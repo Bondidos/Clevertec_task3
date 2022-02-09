@@ -24,5 +24,10 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), Navigation {
             .commit()
     }
 
-    override fun onPowerBtnPush() = finish()
+    override fun onPowerBtnPush() = onBackPressed()
+
+    override fun onBackPressed() {
+        ExitFragment()
+            .show(supportFragmentManager, "Exit?")
+    }
 }

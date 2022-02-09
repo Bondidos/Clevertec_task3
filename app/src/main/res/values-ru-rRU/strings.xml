@@ -2,4 +2,7 @@
 <resources>
     <string name="app_name">Clevertec_task1</string>
     <string name="hello">Привет Мир!</string>
+    <string name="are_you_sure_want_to_exit">Вы действительно хотите выйти?</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
 </resources>

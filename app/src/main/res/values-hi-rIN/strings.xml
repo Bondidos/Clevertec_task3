@@ -2,4 +2,7 @@
 <resources>
     <string name="app_name">Clevertec_task1</string>
     <string name="hello">नमस्ते दुनिया!</string>
+    <string name="are_you_sure_want_to_exit">क्या आप वास्तव मे बाहर जाना चाहते हैं?</string>
+    <string name="yes">हां</string>
+    <string name="no">नहीं</string>
 </resources>

@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Clevertec_task1</string>
+    <string name="hello">Привіт Світ!</string>
+    <string name="are_you_sure_want_to_exit">Ви впевнені, що хочете вийти?</string>
+    <string name="yes">Так</string>
+    <string name="no">Немає</string>
 </resources>

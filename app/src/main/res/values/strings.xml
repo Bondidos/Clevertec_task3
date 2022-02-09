@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Clevertec_task2</string>
     <string name="hello" translatable="false">Hello World!</string>
+    <string name="are_you_sure_want_to_exit">Are you suew want to exit?</string>
+    <string name="yes">yes</string>
+    <string name="no">no</string>
 </resources>

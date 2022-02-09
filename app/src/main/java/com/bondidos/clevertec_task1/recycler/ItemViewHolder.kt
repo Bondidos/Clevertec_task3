@@ -16,6 +16,7 @@ class ItemViewHolder(
             onClick.invoke(position)
         }
         with(binding) {
+            // here will be load image into imageView :)
             title.text = model.title
             description.text = model.description
         }
