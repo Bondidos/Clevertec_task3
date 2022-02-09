@@ -1,13 +1,17 @@
-package com.bondidos.clevertec_task1
+package com.bondidos.clevertec_task1.fragments
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.bondidos.clevertec_task1.Const.DESCRIPTION
-import com.bondidos.clevertec_task1.Const.IMAGE
-import com.bondidos.clevertec_task1.Const.TITLE
+import com.bondidos.clevertec_task1.constants.Const.DESCRIPTION
+import com.bondidos.clevertec_task1.constants.Const.IMAGE
+import com.bondidos.clevertec_task1.constants.Const.TITLE
+import com.bondidos.clevertec_task1.model.ItemModel
+import com.bondidos.clevertec_task1.MainActivity
+import com.bondidos.clevertec_task1.navigation.Navigation
 import com.bondidos.clevertec_task1.databinding.DetailsFragmentBinding
 
 class DetailsFragment : Fragment() {
@@ -15,6 +19,12 @@ class DetailsFragment : Fragment() {
     private var _binding: DetailsFragmentBinding? = null
     private val binding get() = requireNotNull(_binding)
     private var sharedItem: ItemModel? = null
+    private var navigation: Navigation? = null
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        navigation = context as MainActivity
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,26 +41,38 @@ class DetailsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = DetailsFragmentBinding.inflate(inflater,container,false)
+        _binding = DetailsFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        fillDetails()
+        setUpListeners()
+    }
+
+    private fun setUpListeners() {
+        binding.toolBar.setNavigationOnClickListener {
+            navigation?.navigateFirstFragment()
+        }
+        binding.exitBtn.setOnClickListener { navigation?.onPowerBtnPush() }
+    }
+
+    private fun fillDetails() {
         sharedItem?.let {
-            with(binding){
+            with(binding) {
                 detailsTitle.text = it.title
                 detailsDescription.text = it.description
             }
         }
-
     }
 
     override fun onDestroy() {
         _binding = null
         super.onDestroy()
     }
+
     companion object {
 
         @JvmStatic

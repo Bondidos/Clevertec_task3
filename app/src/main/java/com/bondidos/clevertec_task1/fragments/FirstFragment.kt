@@ -1,30 +1,25 @@
-package com.bondidos.clevertec_task1
+package com.bondidos.clevertec_task1.fragments
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.GridLayout
-import android.widget.ProgressBar
-import androidx.core.view.isVisible
-import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.bondidos.clevertec_task1.Const.DESCRIPTION
-import com.bondidos.clevertec_task1.Const.IMAGE
-import com.bondidos.clevertec_task1.Const.TITLE
+import com.bondidos.clevertec_task1.recycler.Adapter
+import com.bondidos.clevertec_task1.constants.Const.DESCRIPTION
+import com.bondidos.clevertec_task1.constants.Const.IMAGE
+import com.bondidos.clevertec_task1.constants.Const.TITLE
+import com.bondidos.clevertec_task1.MainActivity
+import com.bondidos.clevertec_task1.navigation.Navigation
 import com.bondidos.clevertec_task1.databinding.FirstFragmentBinding
+import com.bondidos.clevertec_task1.fragments.viewModel.FirstFragmentViewModel
 
 class FirstFragment : Fragment() {
 
     private var _binding: FirstFragmentBinding? = null
     private val binding get() = requireNotNull(_binding)
-    private var id: Int? = null
     private val viewModel by lazy { FirstFragmentViewModel() }
     private var navigation: Navigation? = null
 
@@ -33,9 +28,9 @@ class FirstFragment : Fragment() {
         Adapter {
             val item = viewModel.getItem(it)
             val bundle = Bundle().apply {
-                putString(IMAGE,item.image)
-                putString(TITLE,item.title)
-                putString(DESCRIPTION,item.description)
+                putString(IMAGE, item.image)
+                putString(TITLE, item.title)
+                putString(DESCRIPTION, item.description)
             }
             navigation?.navigateDetailsFragment(bundle)
         }
@@ -57,7 +52,6 @@ class FirstFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         initRecycler()
     }
 
@@ -69,13 +63,9 @@ class FirstFragment : Fragment() {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = itemAdapter
         }
-
-        binding.recycler.scrollToPosition(viewModel.getScrollPosition())
-
     }
 
     override fun onDestroy() {
-        viewModel.setScrollPosition(itemAdapter.adapterPosition)
         _binding = null
         super.onDestroy()
     }
