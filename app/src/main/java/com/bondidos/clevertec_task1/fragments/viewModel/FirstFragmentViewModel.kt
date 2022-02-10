@@ -7,9 +7,9 @@ class FirstFragmentViewModel : ViewModel() {
 
     private val itemList = List(1000) {
         ItemModel(
-            image = "Place for URL#$it",
-            title = "Title$it",
-            description = "Description$it"
+            image = "Place for URL#${it+1}",
+            title = "Title ${it+1}",
+            description = "Description ${it+1}"
         )
     }
 
