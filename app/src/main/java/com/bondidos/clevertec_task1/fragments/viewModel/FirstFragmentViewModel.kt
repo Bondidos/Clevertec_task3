@@ -24,6 +24,6 @@ class FirstFragmentViewModel @Inject constructor (private val getContacts: GetCo
         itemList?.let {
             return it[id]
         }
-        return ItemModel(null,null,null,null,null)
+        return ItemModel("null",null,null,null,null)
     }
 }

@@ -13,6 +13,7 @@ import com.bondidos.clevertec_task1.model.ItemModel
 import com.bondidos.clevertec_task1.MainActivity
 import com.bondidos.clevertec_task1.navigation.Navigation
 import com.bondidos.clevertec_task1.databinding.DetailsFragmentBinding
+import javax.inject.Inject
 
 class DetailsFragment : Fragment() {
 
@@ -30,7 +31,7 @@ class DetailsFragment : Fragment() {
         super.onCreate(savedInstanceState)
         arguments?.let {
             sharedItem = ItemModel(
-                id = null,
+                id = "null",
                 image = arguments?.getString(IMAGE) ?: "",
                 name = arguments?.getString(TITLE) ?: "",
                 number = arguments?.getString(DESCRIPTION) ?: "",
