@@ -14,6 +14,7 @@ import com.bondidos.clevertec_task1.databinding.FirstFragmentBinding
 import com.bondidos.clevertec_task1.presentation.fragments.viewModel.FirstFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
+
 @AndroidEntryPoint
 class FirstFragment : Fragment() {
 

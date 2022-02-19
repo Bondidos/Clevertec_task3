@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
 import com.bondidos.clevertec_task1.domain.constants.Const.IMAGE
 import com.bondidos.clevertec_task1.domain.model.ItemModel
 import com.bondidos.clevertec_task1.presentation.MainActivity
@@ -19,7 +21,13 @@ import com.bondidos.clevertec_task1.domain.constants.Const.FAMILY_NAME
 import com.bondidos.clevertec_task1.domain.constants.Const.GIVEN_NAME
 import com.bondidos.clevertec_task1.domain.constants.Const.ID
 import com.bondidos.clevertec_task1.domain.constants.Const.PHONE_NUMBER
+import com.bondidos.clevertec_task1.domain.state.IsSuccess
+import com.bondidos.clevertec_task1.presentation.fragments.viewModel.DetailFragmentViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class DetailsFragment : Fragment() {
 
     private var _binding: DetailsFragmentBinding? = null
@@ -27,9 +35,12 @@ class DetailsFragment : Fragment() {
     private var sharedItem: ItemModel? = null
     private var navigation: Navigation? = null
 
+    @Inject
+    lateinit var viewModel: DetailFragmentViewModel
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        navigation = context as MainActivity
+        navigation = context as Navigation
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,10 +79,26 @@ class DetailsFragment : Fragment() {
     }
 
     private fun setUpListeners() {
+        lifecycleScope.launchWhenCreated {
+            viewModel.isAdded.collect{ isSuccess ->
+                when(isSuccess){
+                    is IsSuccess.Success ->
+                        Toast.makeText(requireContext(), "Item added", Toast.LENGTH_LONG).show()
+                    is IsSuccess.Error ->
+                        Toast.makeText(requireContext(), isSuccess.message, Toast.LENGTH_LONG).show()
+                    else -> Unit
+                }
+            }
+        }
         binding.toolBar.setNavigationOnClickListener {
-            navigation?.navigateFirstFragment()
+            navigation?.navigateHome()
         }
         binding.exitBtn.setOnClickListener { navigation?.onPowerBtnPush() }
+        binding.saveContact.setOnClickListener {
+            sharedItem?.let {
+                viewModel.saveContact(it)
+            }
+        }
     }
 
     @SuppressLint("SetTextI18n")
@@ -79,10 +106,10 @@ class DetailsFragment : Fragment() {
         sharedItem?.let {
             with(binding) {
                 detailsImage.setImageURI(Uri.parse(it.image))
-                firstName.text = "Name: "+it.name?.get(GIVEN_NAME)
-                familyName.text = "Family name: "+it.name?.get(FAMILY_NAME)
-                phoneNumber.text = "phone: "+it.number
-                email.text = "Email: "+it.email
+                firstName.text = "Name: " + it.name?.get(GIVEN_NAME)
+                familyName.text = "Family name: " + it.name?.get(FAMILY_NAME)
+                phoneNumber.text = "phone: " + it.number
+                email.text = "Email: " + it.email
             }
         }
     }

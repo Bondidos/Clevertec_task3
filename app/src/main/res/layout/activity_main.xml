@@ -7,7 +7,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/container"
-        android:name="com.bondidos.clevertec_task1.presentation.fragments.FirstFragment"
+        android:name="com.bondidos.clevertec_task1.presentation.fragments.StartScreen"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

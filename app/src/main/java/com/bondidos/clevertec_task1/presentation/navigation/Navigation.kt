@@ -5,6 +5,7 @@ import com.bondidos.clevertec_task1.domain.model.ItemModel
 
 interface Navigation {
     fun navigateFirstFragment()
+    fun navigateHome()
     fun navigateDetailsFragment(item: ItemModel)
     fun onPowerBtnPush()
 }
