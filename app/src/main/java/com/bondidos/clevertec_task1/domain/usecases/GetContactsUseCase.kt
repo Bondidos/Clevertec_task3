@@ -23,7 +23,7 @@ class GetContactsUseCase @Inject constructor(private val context: Context) {
     fun execute(): List<ItemModel> {
         checkPermissions(context)
         val contactList = getContactList(context)
-        Log.d("Main", contactList.toString())
+//        Log.d("Main", contactList.toString())
         return contactList
     }
 }
@@ -46,8 +46,8 @@ private fun getContactList(context: Context): List<ItemModel> {
     )
     // condition check
     contentCursor?.let { cursor ->
-        var namesMap: Map<String, String>?
-        var photoAndNumber: Map<String, String>?
+        var namesMap: Map<String, String?>?
+        var photoAndNumber: Map<String, String?>?
 
         if (cursor.count > 0) {
             while (cursor.moveToNext()) {
@@ -55,7 +55,7 @@ private fun getContactList(context: Context): List<ItemModel> {
                 val idColumnIndex = cursor.getColumnIndex(ContactsContract.Contacts._ID)
                 val id: String = cursor.getString(idColumnIndex)
 
-                namesMap = getNames(context)
+                namesMap = getNames(context,id)
 
                 photoAndNumber = getPhoneNumber(context, id)
 
@@ -105,7 +105,7 @@ private fun getEmail(context: Context, id: String): String {
     return email
 }
 
-private fun getPhoneNumber(context: Context, id: String): Map<String, String> {
+private fun getPhoneNumber(context: Context, id: String): Map<String, String?> {
 
     val phoneUri: Uri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI
 
@@ -119,7 +119,7 @@ private fun getPhoneNumber(context: Context, id: String): Map<String, String> {
         arrayOf(id),
         null
     )
-    val result = mutableMapOf<String, String>()
+    val result = mutableMapOf<String, String?>()
 
     phoneCursor?.let {
         if (phoneCursor.moveToNext()) {
@@ -138,7 +138,7 @@ private fun getPhoneNumber(context: Context, id: String): Map<String, String> {
     return result
 }
 
-private fun getNames(context: Context): Map<String, String> {
+private fun getNames(context: Context,id: String): Map<String, String?> {
 
     val whereName = ContactsContract.Data.MIMETYPE + " = ?"
     val whereNameParams = arrayOf(ContactsContract.CommonDataKinds.StructuredName.CONTENT_ITEM_TYPE)
@@ -150,21 +150,26 @@ private fun getNames(context: Context): Map<String, String> {
         ContactsContract.CommonDataKinds.StructuredName.GIVEN_NAME
     )
     val nameColumns = mutableMapOf<String, Int>()
-    val names = mutableMapOf<String, String>()
+    val names = mutableMapOf<String, String?>()
 
     nameCur?.let {
+        Log.d("Main", it.toString())
+
         nameColumns[GIVEN_NAME] =
             nameCur.getColumnIndex(ContactsContract.CommonDataKinds.StructuredName.GIVEN_NAME)
         nameColumns[FAMILY_NAME] =
             nameCur.getColumnIndex(ContactsContract.CommonDataKinds.StructuredName.FAMILY_NAME)
         nameColumns[DISPLAY_NAME] =
             nameCur.getColumnIndex(ContactsContract.CommonDataKinds.StructuredName.DISPLAY_NAME)
-        while (nameCur.moveToNext()) {
-            names[GIVEN_NAME] = nameCur.getString(nameColumns[GIVEN_NAME] ?: 0)
-            names[FAMILY_NAME] = nameCur.getString(nameColumns[FAMILY_NAME] ?: 0)
-            names[DISPLAY_NAME] = nameCur.getString(nameColumns[DISPLAY_NAME] ?: 0)
-        }
+        nameCur.move(id.toInt())
+            names[GIVEN_NAME] = nameColumns[GIVEN_NAME]?.let { it1 -> nameCur.getString(it1) }
+            names[FAMILY_NAME] = nameColumns[FAMILY_NAME]?.let { it1 -> nameCur.getString(it1) }
+            names[DISPLAY_NAME] = nameColumns[DISPLAY_NAME]?.let { it1 -> nameCur.getString(it1) }
+
     }
+    Log.d("Main", nameColumns.toString())
+    Log.d("Main", names.toString())
+
     nameCur?.close()
     return names
 }

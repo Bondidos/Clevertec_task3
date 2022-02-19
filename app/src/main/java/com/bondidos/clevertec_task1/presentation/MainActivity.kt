@@ -1,12 +1,16 @@
 package com.bondidos.clevertec_task1.presentation
 
+import android.content.DialogInterface
 import android.os.Bundle
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.bondidos.clevertec_task1.ExitFragment
 import com.bondidos.clevertec_task1.R
 import com.bondidos.clevertec_task1.domain.model.ItemModel
 import com.bondidos.clevertec_task1.presentation.fragments.DetailsFragment
 import com.bondidos.clevertec_task1.presentation.fragments.FirstFragment
+import com.bondidos.clevertec_task1.presentation.fragments.NumbersDialog
 import com.bondidos.clevertec_task1.presentation.fragments.StartScreen
 import com.bondidos.clevertec_task1.presentation.navigation.Navigation
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,7 +27,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), Navigation {
                 R.animator.flip_in,
                 R.animator.flip_out
             )
-            .replace(R.id.container,FirstFragment())
+            .replace(R.id.container, FirstFragment())
             .commit()
     }
 
@@ -36,7 +40,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), Navigation {
                 R.animator.flip_in,
                 R.animator.flip_out
             )
-            .replace(R.id.container,StartScreen())
+            .replace(R.id.container, StartScreen())
             .commit()
     }
 
@@ -54,6 +58,9 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), Navigation {
     }
 
     override fun onPowerBtnPush() = onBackPressed()
+    override fun openListDialog(list: List<String?>) {
+       NumbersDialog(list).show(supportFragmentManager, "List")
+    }
 
     override fun onBackPressed() {
         ExitFragment()

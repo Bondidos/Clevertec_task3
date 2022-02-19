@@ -13,7 +13,7 @@ import com.bondidos.clevertec_task1.domain.constants.Const.GIVEN_NAME
 data class ItemModel(
     @PrimaryKey
     val id: String,
-    val image: String? = null,
+    val image: String?,
     val name: Map<String,String?>?,
     val number: String?,
     val email: String?
@@ -22,15 +22,15 @@ data class ItemModel(
 class NameConverter{
 
     @TypeConverter
-    fun fromMapToString(names: Map<String,String>?): String?{
-        if(names != null) return null
-        return names.toString()
+    fun fromMapToString(name: Map<String,String>?): String?{
+        if(name == null) return null
+        return name.toString()
     }
 
     @TypeConverter
-    fun fromStringToMap(names: String?): Map<String,String>?{
-        if(names == null) return null
-        val namesList = names.split(",")
+    fun fromStringToMap(name: String?): Map<String,String>?{
+        if(name == null) return null
+        val namesList = name.split(",")
         return mapOf(
             GIVEN_NAME to namesList.first().removeSuffix("$GIVEN_NAME="),
             FAMILY_NAME to namesList.first().removeSuffix("$FAMILY_NAME="),

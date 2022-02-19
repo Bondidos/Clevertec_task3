@@ -8,4 +8,5 @@ interface Navigation {
     fun navigateHome()
     fun navigateDetailsFragment(item: ItemModel)
     fun onPowerBtnPush()
+    fun openListDialog(list: List<String?>)
 }

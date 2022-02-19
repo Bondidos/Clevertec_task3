@@ -18,9 +18,13 @@ class ItemViewHolder(
             onClick.invoke(position)
         }
         with(binding) {
-            image.setImageURI(Uri.parse(model.image))
-            firstName.text = model.name?.get(DISPLAY_NAME) ?: ""
-            number.text = model.number
+            model.image?.let{
+                image.setImageURI(Uri.parse(model.image))
+            }
+            model.name?.let{
+                firstName.text = model.name[DISPLAY_NAME]
+            }
+            number.text = model.number ?: ""
         }
     }
 }

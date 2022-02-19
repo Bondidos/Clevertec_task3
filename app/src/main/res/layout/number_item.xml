@@ -1,0 +1,15 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    android:gravity="center_vertical">
+
+    <TextView
+        android:id="@+id/numberText"
+        android:padding="10dp"
+        android:layout_width="@dimen/button_width"
+        android:layout_height="wrap_content"
+        android:textAlignment="textStart"
+        android:text="@string/element"/>
+</FrameLayout>
