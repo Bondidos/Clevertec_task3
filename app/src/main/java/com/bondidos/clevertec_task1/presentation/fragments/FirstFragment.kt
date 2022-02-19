@@ -14,6 +14,7 @@ import com.bondidos.clevertec_task1.domain.constants.Const.TITLE
 import com.bondidos.clevertec_task1.presentation.MainActivity
 import com.bondidos.clevertec_task1.presentation.navigation.Navigation
 import com.bondidos.clevertec_task1.databinding.FirstFragmentBinding
+import com.bondidos.clevertec_task1.domain.constants.Const.DISPLAY_NAME
 import com.bondidos.clevertec_task1.presentation.fragments.viewModel.FirstFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -34,7 +35,7 @@ class FirstFragment : Fragment() {
             val item = viewModel.getItem(it)
             val bundle = Bundle().apply {
                 putString(IMAGE, item.image)
-                putString(TITLE, item.name)
+                putString(TITLE, item.name?.get(DISPLAY_NAME))
                 putString(DESCRIPTION, item.number)
             }
             navigation?.navigateDetailsFragment(bundle)

@@ -32,7 +32,7 @@ class DetailsFragment : Fragment() {
             sharedItem = ItemModel(
                 id = "null",
                 image = arguments?.getString(IMAGE) ?: "",
-                name = arguments?.getString(TITLE) ?: "",
+                name = null,
                 number = arguments?.getString(DESCRIPTION) ?: "",
                 email = null
             )
@@ -64,7 +64,7 @@ class DetailsFragment : Fragment() {
     private fun fillDetails() {
         sharedItem?.let {
             with(binding) {
-                detailsTitle.text = it.name
+                detailsTitle.text = "it.name"
                 detailsDescription.text = it.number
             }
         }

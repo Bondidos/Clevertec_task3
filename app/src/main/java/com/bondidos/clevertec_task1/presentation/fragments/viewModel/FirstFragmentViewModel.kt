@@ -8,13 +8,7 @@ import javax.inject.Inject
 class FirstFragmentViewModel @Inject constructor (private val getContacts: GetContactsUseCase): ViewModel() {
 
     private var itemList : List<ItemModel>? = null
-        /*List(1000) {
-        ItemModel(
-            name = "Place for URL#${it+1}",
-            title = "Title ${it+1}",
-            description = "Description ${it+1}"
-        )
-    }*/
+
     init {
         itemList = getContacts.execute()
     }
