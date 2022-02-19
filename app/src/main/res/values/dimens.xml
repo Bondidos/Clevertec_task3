@@ -10,8 +10,8 @@
     <dimen name="item_margin">10dp</dimen>.
     <dimen name="image_height">48dp</dimen>
     <dimen name="image_width">48dp</dimen>
-    <dimen name="detail_image_height">96dp</dimen>
-    <dimen name="detail_image_width">96dp</dimen>
+    <dimen name="detail_image_height">300dp</dimen>
+    <dimen name="detail_image_width">300dp</dimen>
     <dimen name="toolbar_height">48dp</dimen>
 
 

@@ -14,7 +14,7 @@ data class ItemModel(
     @PrimaryKey
     val id: String,
     val image: String? = null,
-    val name: Map<String,String>?,
+    val name: Map<String,String?>?,
     val number: String?,
     val email: String?
 )

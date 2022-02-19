@@ -8,13 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bondidos.clevertec_task1.presentation.recycler.Adapter
-import com.bondidos.clevertec_task1.domain.constants.Const.DESCRIPTION
-import com.bondidos.clevertec_task1.domain.constants.Const.IMAGE
-import com.bondidos.clevertec_task1.domain.constants.Const.TITLE
 import com.bondidos.clevertec_task1.presentation.MainActivity
 import com.bondidos.clevertec_task1.presentation.navigation.Navigation
 import com.bondidos.clevertec_task1.databinding.FirstFragmentBinding
-import com.bondidos.clevertec_task1.domain.constants.Const.DISPLAY_NAME
 import com.bondidos.clevertec_task1.presentation.fragments.viewModel.FirstFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -31,14 +27,7 @@ class FirstFragment : Fragment() {
     private val itemAdapter: Adapter by lazy {
 
         Adapter {
-            //todo read notes from bitbucket
-            val item = viewModel.getItem(it)
-            val bundle = Bundle().apply {
-                putString(IMAGE, item.image)
-                putString(TITLE, item.name?.get(DISPLAY_NAME))
-                putString(DESCRIPTION, item.number)
-            }
-            navigation?.navigateDetailsFragment(bundle)
+            navigation?.navigateDetailsFragment(viewModel.getItem(it))
         }
     }
 

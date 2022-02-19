@@ -19,7 +19,7 @@ class ItemViewHolder(
         }
         with(binding) {
             image.setImageURI(Uri.parse(model.image))
-            name.text = model.name?.get(DISPLAY_NAME) ?: ""
+            firstName.text = model.name?.get(DISPLAY_NAME) ?: ""
             number.text = model.number
         }
     }

@@ -1,9 +1,10 @@
 package com.bondidos.clevertec_task1.presentation.navigation
 
 import android.os.Bundle
+import com.bondidos.clevertec_task1.domain.model.ItemModel
 
 interface Navigation {
     fun navigateFirstFragment()
-    fun navigateDetailsFragment(item: Bundle)
+    fun navigateDetailsFragment(item: ItemModel)
     fun onPowerBtnPush()
 }

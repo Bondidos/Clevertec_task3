@@ -23,30 +23,33 @@
         android:background="@drawable/round_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolBar"
-        app:layout_constraintVertical_bias="0.231"
+        app:layout_constraintVertical_bias="0.086"
         app:srcCompat="@drawable/baseline_perm_identity_black_24dp" />
 
     <TextView
-        android:id="@+id/details_title"
+        android:id="@+id/firstName"
         style="@style/TextTitleStyle"
-        android:text="Title"
+        android:layout_marginTop="24dp"
+        android:text="FirstName"
         app:layout_constraintBottom_toTopOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="@+id/detailsImage"
-        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="@+id/detailsImage"
         app:layout_constraintTop_toBottomOf="@+id/detailsImage" />
 
     <TextView
-        android:id="@+id/details_description"
-        style="@style/TextDescriptionStyle"
-        android:layout_marginTop="8dp"
-        android:text="Description"
-        app:layout_constraintEnd_toEndOf="@+id/details_title"
-        app:layout_constraintStart_toStartOf="@+id/details_title"
-        app:layout_constraintTop_toBottomOf="@+id/details_title" />
+        android:id="@+id/familyName"
+        style="@style/TextTitleStyle"
+        android:layout_marginTop="21dp"
+        android:text="FamilyName"
+        app:layout_constraintBottom_toTopOf="@+id/phoneNumber"
+        app:layout_constraintEnd_toEndOf="@+id/phoneNumber"
+        app:layout_constraintStart_toStartOf="@+id/phoneNumber"
+        app:layout_constraintTop_toBottomOf="@+id/firstName"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageButton
         android:id="@+id/exitBtn"
@@ -63,11 +66,32 @@
         android:id="@+id/saveContact"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="56dp"
         android:text="SaveContact"
-        app:layout_constraintEnd_toEndOf="@+id/details_description"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/details_description"
-        app:layout_constraintTop_toBottomOf="@+id/details_description" />
+        app:layout_constraintEnd_toEndOf="@+id/phoneNumber"
+        app:layout_constraintHorizontal_bias="0.481"
+        app:layout_constraintStart_toStartOf="@+id/phoneNumber"
+        app:layout_constraintTop_toBottomOf="@+id/phoneNumber" />
+
+    <TextView
+        android:id="@+id/email"
+        style="@style/TextDescriptionStyle"
+        android:text="Email"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/phoneNumber"
+        app:layout_constraintHorizontal_bias="0.521"
+        app:layout_constraintStart_toStartOf="@+id/phoneNumber"
+        app:layout_constraintTop_toBottomOf="@+id/phoneNumber"
+        app:layout_constraintVertical_bias="0.041" />
+
+    <TextView
+        android:id="@+id/phoneNumber"
+        style="@style/TextDescriptionStyle"
+        android:layout_marginTop="72dp"
+        android:text="Description"
+        app:layout_constraintEnd_toEndOf="@+id/firstName"
+        app:layout_constraintHorizontal_bias="0.461"
+        app:layout_constraintStart_toStartOf="@+id/firstName"
+        app:layout_constraintTop_toBottomOf="@+id/firstName" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

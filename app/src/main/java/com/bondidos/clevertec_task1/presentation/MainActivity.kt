@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.bondidos.clevertec_task1.ExitFragment
 import com.bondidos.clevertec_task1.R
+import com.bondidos.clevertec_task1.domain.model.ItemModel
 import com.bondidos.clevertec_task1.presentation.fragments.DetailsFragment
 import com.bondidos.clevertec_task1.presentation.navigation.Navigation
 import dagger.hilt.android.AndroidEntryPoint
@@ -16,7 +17,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), Navigation {
             .popBackStack()
     }
 
-    override fun navigateDetailsFragment(item: Bundle) {
+    override fun navigateDetailsFragment(item: ItemModel) {
         supportFragmentManager
             .beginTransaction()
             .setCustomAnimations(

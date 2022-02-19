@@ -18,7 +18,7 @@
         app:srcCompat="@drawable/baseline_perm_identity_black_24dp" />
 
     <TextView
-        android:id="@+id/name"
+        android:id="@+id/firstName"
         style="@style/TextTitleStyle"
         android:layout_marginTop="16dp"
         android:text="Title"
@@ -35,8 +35,8 @@
         android:layout_marginBottom="8dp"
         android:text="Description"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/name"
+        app:layout_constraintEnd_toEndOf="@+id/firstName"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/name" />
+        app:layout_constraintStart_toStartOf="@+id/firstName" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
