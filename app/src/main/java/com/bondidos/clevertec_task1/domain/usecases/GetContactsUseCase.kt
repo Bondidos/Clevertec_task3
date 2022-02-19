@@ -1,4 +1,4 @@
-package com.bondidos.clevertec_task1
+package com.bondidos.clevertec_task1.domain.usecases
 
 import android.Manifest
 import android.content.Context
@@ -9,14 +9,17 @@ import android.provider.ContactsContract
 import android.util.Log
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.bondidos.clevertec_task1.model.ItemModel
+import com.bondidos.clevertec_task1.domain.model.ItemModel
+import com.bondidos.clevertec_task1.presentation.MainActivity
 import javax.inject.Inject
 
 class GetContactsUseCase @Inject constructor(private val context: Context) {
 
     fun execute(): List<ItemModel> {
         checkPermissions(context)
-        return getContactList(context)
+        val contactList = getContactList(context)
+        Log.d("Main",contactList.toString())
+        return contactList
     }
 }
 
@@ -40,6 +43,7 @@ private fun getContactList(context: Context): List<ItemModel> {
     contentCursor?.let { cursor ->
         var number: String? = null
         var email: String? = null
+        var photoUri: String? = null
 
 
         if (cursor.count > 0) {
@@ -53,7 +57,7 @@ private fun getContactList(context: Context): List<ItemModel> {
                     cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME_PRIMARY)
                 val name = cursor.getString(nameColumnIndex)
 
-                // init phone uri
+                // PhoneNumber
                 val phoneUri: Uri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI
 
                 // init selection
@@ -69,18 +73,22 @@ private fun getContactList(context: Context): List<ItemModel> {
                     null
                 )
 
-                // check condition
                 phoneCursor?.let {
                     if (phoneCursor.moveToNext()) {
                         // phoneCursor move next
                         val numberColumn = phoneCursor.getColumnIndex(
                             ContactsContract.CommonDataKinds.Phone.NUMBER
                         )
+                        val imageColumn = phoneCursor.getColumnIndex(
+                            ContactsContract.CommonDataKinds.Phone.PHOTO_URI
+                        )
                         number = phoneCursor.getString(numberColumn)
+                        photoUri = phoneCursor.getString(imageColumn)
                     }
                 }
                 phoneCursor?.close()
 
+                // Email
                 val emailUri: Uri = ContactsContract.CommonDataKinds.Email.CONTENT_URI
 
                 val selectionEmail: String =
@@ -106,12 +114,15 @@ private fun getContactList(context: Context): List<ItemModel> {
 
                 emailCursor?.close()
 
+
+
                 contactList.add(
                     ItemModel(
                         id = id,
                         name = name,
                         number = number ?: "",
-                        email = email
+                        email = email,
+                        image = photoUri
                     )
                 )
             }
@@ -120,9 +131,13 @@ private fun getContactList(context: Context): List<ItemModel> {
     contentCursor?.close()
     return contactList
 }
+
 private fun checkPermissions(context: Context) {
-    if(ContextCompat.checkSelfPermission(context,
-            Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED){
+    if (ContextCompat.checkSelfPermission(
+            context,
+            Manifest.permission.READ_CONTACTS
+        ) != PackageManager.PERMISSION_GRANTED
+    ) {
         //request permission
         ActivityCompat.requestPermissions(
             context as MainActivity,

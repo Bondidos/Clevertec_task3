@@ -1,8 +1,9 @@
-package com.bondidos.clevertec_task1.recycler
+package com.bondidos.clevertec_task1.presentation.recycler
 
+import android.net.Uri
 import androidx.recyclerview.widget.RecyclerView
 import com.bondidos.clevertec_task1.databinding.RecyclerItemBinding
-import com.bondidos.clevertec_task1.model.ItemModel
+import com.bondidos.clevertec_task1.domain.model.ItemModel
 
 class ItemViewHolder(
     private val binding: RecyclerItemBinding,
@@ -16,7 +17,7 @@ class ItemViewHolder(
             onClick.invoke(position)
         }
         with(binding) {
-            // here will be load image into imageView :)
+            image.setImageURI(Uri.parse(model.image))
             name.text = model.name
             number.text = model.number
         }

@@ -1,11 +1,11 @@
-package com.bondidos.clevertec_task1.recycler
+package com.bondidos.clevertec_task1.presentation.recycler
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bondidos.clevertec_task1.databinding.RecyclerItemBinding
-import com.bondidos.clevertec_task1.model.ItemModel
+import com.bondidos.clevertec_task1.domain.model.ItemModel
 
 class Adapter(private val onClick: (id: Int) -> Unit) : RecyclerView.Adapter<ItemViewHolder>() {
 

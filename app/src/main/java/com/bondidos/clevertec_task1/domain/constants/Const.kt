@@ -1,4 +1,4 @@
-package com.bondidos.clevertec_task1.constants
+package com.bondidos.clevertec_task1.domain.constants
 
 object Const {
     const val IMAGE = "image"

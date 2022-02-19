@@ -1,4 +1,4 @@
-package com.bondidos.clevertec_task1.fragments
+package com.bondidos.clevertec_task1.presentation.fragments
 
 import android.content.Context
 import android.os.Bundle
@@ -7,14 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bondidos.clevertec_task1.recycler.Adapter
-import com.bondidos.clevertec_task1.constants.Const.DESCRIPTION
-import com.bondidos.clevertec_task1.constants.Const.IMAGE
-import com.bondidos.clevertec_task1.constants.Const.TITLE
-import com.bondidos.clevertec_task1.MainActivity
-import com.bondidos.clevertec_task1.navigation.Navigation
+import com.bondidos.clevertec_task1.presentation.recycler.Adapter
+import com.bondidos.clevertec_task1.domain.constants.Const.DESCRIPTION
+import com.bondidos.clevertec_task1.domain.constants.Const.IMAGE
+import com.bondidos.clevertec_task1.domain.constants.Const.TITLE
+import com.bondidos.clevertec_task1.presentation.MainActivity
+import com.bondidos.clevertec_task1.presentation.navigation.Navigation
 import com.bondidos.clevertec_task1.databinding.FirstFragmentBinding
-import com.bondidos.clevertec_task1.fragments.viewModel.FirstFragmentViewModel
+import com.bondidos.clevertec_task1.presentation.fragments.viewModel.FirstFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 @AndroidEntryPoint

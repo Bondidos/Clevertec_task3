@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.bondidos.clevertec_task1.databinding.FragmentDialogBinding
+import com.bondidos.clevertec_task1.presentation.MainActivity
 
 class ExitFragment : DialogFragment() {
 

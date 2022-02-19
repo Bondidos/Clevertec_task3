@@ -1,4 +1,4 @@
-package com.bondidos.clevertec_task1.navigation
+package com.bondidos.clevertec_task1.presentation.navigation
 
 import android.os.Bundle
 

@@ -1,4 +1,4 @@
-package com.bondidos.clevertec_task1.fragments
+package com.bondidos.clevertec_task1.presentation.fragments
 
 import android.content.Context
 import android.os.Bundle
@@ -6,14 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.bondidos.clevertec_task1.constants.Const.DESCRIPTION
-import com.bondidos.clevertec_task1.constants.Const.IMAGE
-import com.bondidos.clevertec_task1.constants.Const.TITLE
-import com.bondidos.clevertec_task1.model.ItemModel
-import com.bondidos.clevertec_task1.MainActivity
-import com.bondidos.clevertec_task1.navigation.Navigation
+import com.bondidos.clevertec_task1.domain.constants.Const.DESCRIPTION
+import com.bondidos.clevertec_task1.domain.constants.Const.IMAGE
+import com.bondidos.clevertec_task1.domain.constants.Const.TITLE
+import com.bondidos.clevertec_task1.domain.model.ItemModel
+import com.bondidos.clevertec_task1.presentation.MainActivity
+import com.bondidos.clevertec_task1.presentation.navigation.Navigation
 import com.bondidos.clevertec_task1.databinding.DetailsFragmentBinding
-import javax.inject.Inject
 
 class DetailsFragment : Fragment() {
 

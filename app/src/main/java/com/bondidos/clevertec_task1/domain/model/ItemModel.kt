@@ -1,4 +1,4 @@
-package com.bondidos.clevertec_task1.model
+package com.bondidos.clevertec_task1.domain.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

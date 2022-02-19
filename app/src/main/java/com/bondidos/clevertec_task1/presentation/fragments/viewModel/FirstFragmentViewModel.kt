@@ -1,8 +1,8 @@
-package com.bondidos.clevertec_task1.fragments.viewModel
+package com.bondidos.clevertec_task1.presentation.fragments.viewModel
 
 import androidx.lifecycle.ViewModel
-import com.bondidos.clevertec_task1.GetContactsUseCase
-import com.bondidos.clevertec_task1.model.ItemModel
+import com.bondidos.clevertec_task1.domain.model.ItemModel
+import com.bondidos.clevertec_task1.domain.usecases.GetContactsUseCase
 import javax.inject.Inject
 
 class FirstFragmentViewModel @Inject constructor (private val getContacts: GetContactsUseCase): ViewModel() {
