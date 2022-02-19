@@ -18,11 +18,11 @@
         app:srcCompat="@drawable/baseline_perm_identity_black_24dp" />
 
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/name"
         style="@style/TextTitleStyle"
         android:layout_marginTop="16dp"
         android:text="Title"
-        app:layout_constraintBottom_toTopOf="@+id/description"
+        app:layout_constraintBottom_toTopOf="@+id/number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.133"
         app:layout_constraintStart_toEndOf="@+id/image"
@@ -30,13 +30,13 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/description"
+        android:id="@+id/number"
         style="@style/TextDescriptionStyle"
         android:layout_marginBottom="8dp"
         android:text="Description"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/title"
+        app:layout_constraintEnd_toEndOf="@+id/name"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/title" />
+        app:layout_constraintStart_toStartOf="@+id/name" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

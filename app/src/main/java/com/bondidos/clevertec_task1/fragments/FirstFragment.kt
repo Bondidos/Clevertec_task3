@@ -15,22 +15,27 @@ import com.bondidos.clevertec_task1.MainActivity
 import com.bondidos.clevertec_task1.navigation.Navigation
 import com.bondidos.clevertec_task1.databinding.FirstFragmentBinding
 import com.bondidos.clevertec_task1.fragments.viewModel.FirstFragmentViewModel
-
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
+@AndroidEntryPoint
 class FirstFragment : Fragment() {
 
     private var _binding: FirstFragmentBinding? = null
     private val binding get() = requireNotNull(_binding)
-    private val viewModel by lazy { FirstFragmentViewModel() }
     private var navigation: Navigation? = null
+
+    @Inject
+    lateinit var viewModel: FirstFragmentViewModel
 
     private val itemAdapter: Adapter by lazy {
 
         Adapter {
+            //todo read notes from bitbucket
             val item = viewModel.getItem(it)
             val bundle = Bundle().apply {
                 putString(IMAGE, item.image)
-                putString(TITLE, item.title)
-                putString(DESCRIPTION, item.description)
+                putString(TITLE, item.name)
+                putString(DESCRIPTION, item.number)
             }
             navigation?.navigateDetailsFragment(bundle)
         }

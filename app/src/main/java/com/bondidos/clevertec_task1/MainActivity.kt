@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.bondidos.clevertec_task1.fragments.DetailsFragment
 import com.bondidos.clevertec_task1.navigation.Navigation
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity(R.layout.activity_main), Navigation {
 
     override fun navigateFirstFragment() {
