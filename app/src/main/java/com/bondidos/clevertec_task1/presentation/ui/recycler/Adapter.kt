@@ -1,4 +1,4 @@
-package com.bondidos.clevertec_task1.presentation.recycler
+package com.bondidos.clevertec_task1.presentation.ui.recycler
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -7,7 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bondidos.clevertec_task1.databinding.RecyclerItemBinding
 import com.bondidos.clevertec_task1.domain.model.ItemModel
 
-class Adapter(private val onClick: (id: Int) -> Unit) : RecyclerView.Adapter<ItemViewHolder>() {
+class Adapter(private val onClick: (item: ItemModel) -> Unit) :
+    RecyclerView.Adapter<ItemViewHolder>() {
 
     private val list: MutableList<ItemModel> = mutableListOf()
 
@@ -18,7 +19,7 @@ class Adapter(private val onClick: (id: Int) -> Unit) : RecyclerView.Adapter<Ite
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) =
-        holder.onBind(list[position], position)
+        holder.onBind(list[position])
 
     override fun getItemCount() = list.size
 

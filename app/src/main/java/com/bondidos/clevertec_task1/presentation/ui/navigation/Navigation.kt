@@ -1,6 +1,5 @@
-package com.bondidos.clevertec_task1.presentation.navigation
+package com.bondidos.clevertec_task1.presentation.ui.navigation
 
-import android.os.Bundle
 import com.bondidos.clevertec_task1.domain.model.ItemModel
 
 interface Navigation {

@@ -1,4 +1,4 @@
-package com.bondidos.clevertec_task1.presentation.fragments
+package com.bondidos.clevertec_task1.presentation.ui.fragments.detailsScreen
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -12,8 +12,7 @@ import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import com.bondidos.clevertec_task1.domain.constants.Const.IMAGE
 import com.bondidos.clevertec_task1.domain.model.ItemModel
-import com.bondidos.clevertec_task1.presentation.MainActivity
-import com.bondidos.clevertec_task1.presentation.navigation.Navigation
+import com.bondidos.clevertec_task1.presentation.ui.navigation.Navigation
 import com.bondidos.clevertec_task1.databinding.DetailsFragmentBinding
 import com.bondidos.clevertec_task1.domain.constants.Const.DISPLAY_NAME
 import com.bondidos.clevertec_task1.domain.constants.Const.EMAIL
@@ -22,7 +21,6 @@ import com.bondidos.clevertec_task1.domain.constants.Const.GIVEN_NAME
 import com.bondidos.clevertec_task1.domain.constants.Const.ID
 import com.bondidos.clevertec_task1.domain.constants.Const.PHONE_NUMBER
 import com.bondidos.clevertec_task1.domain.state.IsSuccess
-import com.bondidos.clevertec_task1.presentation.fragments.viewModel.DetailFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
@@ -55,7 +53,7 @@ class DetailsFragment : Fragment() {
 
             sharedItem = ItemModel(
                 id = args.getString(ID) ?: "",
-                image = args.getString(IMAGE) ?: "",
+                image = args.getString(IMAGE),
                 name = names,
                 number = args.getString(PHONE_NUMBER) ?: "",
                 email = args.getString(EMAIL) ?: ""
@@ -80,12 +78,13 @@ class DetailsFragment : Fragment() {
 
     private fun setUpListeners() {
         lifecycleScope.launchWhenCreated {
-            viewModel.isAdded.collect{ isSuccess ->
-                when(isSuccess){
+            viewModel.isAdded.collect { isSuccess ->
+                when (isSuccess) {
                     is IsSuccess.Success ->
                         Toast.makeText(requireContext(), "Item added", Toast.LENGTH_LONG).show()
                     is IsSuccess.Error ->
-                        Toast.makeText(requireContext(), isSuccess.message, Toast.LENGTH_LONG).show()
+                        Toast.makeText(requireContext(), isSuccess.message, Toast.LENGTH_LONG)
+                            .show()
                     else -> Unit
                 }
             }
@@ -105,9 +104,11 @@ class DetailsFragment : Fragment() {
     private fun fillDetails() {
         sharedItem?.let {
             with(binding) {
-                detailsImage.setImageURI(Uri.parse(it.image))
-                firstName.text = "Name: " + it.name?.get(GIVEN_NAME)
-                familyName.text = "Family name: " + it.name?.get(FAMILY_NAME)
+                it.image?.let { string ->
+                    detailsImage.setImageURI(Uri.parse(string))
+                }
+                firstName.text = "Name: " + it.name?.let { it[GIVEN_NAME] ?: "" }
+                familyName.text = "Family name: " + it.name?.let { it[FAMILY_NAME] ?: "" }
                 phoneNumber.text = "phone: " + it.number
                 email.text = "Email: " + it.email
             }

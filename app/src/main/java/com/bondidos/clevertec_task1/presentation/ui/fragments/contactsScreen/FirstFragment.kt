@@ -1,18 +1,22 @@
-package com.bondidos.clevertec_task1.presentation.fragments
+package com.bondidos.clevertec_task1.presentation.ui.fragments.contactsScreen
 
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bondidos.clevertec_task1.presentation.recycler.Adapter
-import com.bondidos.clevertec_task1.presentation.MainActivity
-import com.bondidos.clevertec_task1.presentation.navigation.Navigation
 import com.bondidos.clevertec_task1.databinding.FirstFragmentBinding
-import com.bondidos.clevertec_task1.presentation.fragments.viewModel.FirstFragmentViewModel
+import com.bondidos.clevertec_task1.domain.state.IsSuccess
+import com.bondidos.clevertec_task1.presentation.ui.MainActivity
+import com.bondidos.clevertec_task1.presentation.ui.navigation.Navigation
+import com.bondidos.clevertec_task1.presentation.ui.recycler.Adapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -28,7 +32,7 @@ class FirstFragment : Fragment() {
     private val itemAdapter: Adapter by lazy {
 
         Adapter {
-            navigation?.navigateDetailsFragment(viewModel.getItem(it))
+            navigation?.navigateDetailsFragment(it)
         }
     }
 
@@ -48,12 +52,27 @@ class FirstFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initRecycler()
+        init()
     }
 
-    private fun initRecycler() {
+    private fun init() {
 
-        itemAdapter.setList(viewModel.getItemList())
+        lifecycleScope.launchWhenCreated {
+            viewModel.itemList.collect { state ->
+                when (state) {
+                    is IsSuccess.Loading -> binding.progressBar.isVisible = true
+                    is IsSuccess.SuccessWithData -> {
+                        binding.progressBar.isVisible = false
+                        itemAdapter.setList(state.data)
+                    }
+                    is IsSuccess.Error -> {
+                        binding.progressBar.isVisible = false
+                        Toast.makeText(requireContext(), state.message, Toast.LENGTH_LONG).show()
+                    }
+                    else -> Unit
+                }
+            }
+        }
 
         binding.recycler.apply {
             layoutManager = LinearLayoutManager(requireContext())

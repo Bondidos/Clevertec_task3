@@ -10,5 +10,8 @@ object Const {
     const val PHOTO_URI = "photo_uri"
     const val EMAIL = "email"
     const val SHARED_PREFS = "SharedPrefs"
-
+    const val CHANNEL_ID = "Clevertec"
+    const val CHANNEL_NAME = "Clevertec channel"
+    const val DESCRIPTION = "Clevertec notifications"
+    const val NOTIFICATION_ID = 777
 }

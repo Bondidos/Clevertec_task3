@@ -1,4 +1,4 @@
-package com.bondidos.clevertec_task1
+package com.bondidos.clevertec_task1.presentation.ui.fragments.dialogs
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.bondidos.clevertec_task1.databinding.FragmentDialogBinding
-import com.bondidos.clevertec_task1.presentation.MainActivity
+import com.bondidos.clevertec_task1.presentation.ui.MainActivity
 
 class ExitFragment : DialogFragment() {
 

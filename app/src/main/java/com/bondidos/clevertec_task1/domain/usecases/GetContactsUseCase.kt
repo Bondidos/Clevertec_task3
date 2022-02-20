@@ -1,30 +1,29 @@
 package com.bondidos.clevertec_task1.domain.usecases
 
-import android.Manifest
 import android.content.Context
-import android.content.pm.PackageManager
 import android.database.Cursor
 import android.net.Uri
 import android.provider.ContactsContract
-import android.util.Log
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import com.bondidos.clevertec_task1.domain.constants.Const.DISPLAY_NAME
 import com.bondidos.clevertec_task1.domain.constants.Const.FAMILY_NAME
 import com.bondidos.clevertec_task1.domain.constants.Const.GIVEN_NAME
 import com.bondidos.clevertec_task1.domain.constants.Const.PHONE_NUMBER
 import com.bondidos.clevertec_task1.domain.constants.Const.PHOTO_URI
 import com.bondidos.clevertec_task1.domain.model.ItemModel
-import com.bondidos.clevertec_task1.presentation.MainActivity
+import com.bondidos.clevertec_task1.domain.state.IsSuccess
+import java.lang.Exception
+import java.lang.IndexOutOfBoundsException
 import javax.inject.Inject
 
 class GetContactsUseCase @Inject constructor(private val context: Context) {
 
-    fun execute(): List<ItemModel> {
-        checkPermissions(context)
-        val contactList = getContactList(context)
-//        Log.d("Main", contactList.toString())
-        return contactList
+    fun execute(): IsSuccess {
+        return try {
+            val result = getContactList(context)
+            IsSuccess.SuccessWithData(result)
+        } catch (e: Exception) {
+            IsSuccess.Error("Can't read contacts")
+        }
     }
 }
 
@@ -55,7 +54,7 @@ private fun getContactList(context: Context): List<ItemModel> {
                 val idColumnIndex = cursor.getColumnIndex(ContactsContract.Contacts._ID)
                 val id: String = cursor.getString(idColumnIndex)
 
-                namesMap = getNames(context,id)
+                namesMap = getNames(context, id)
 
                 photoAndNumber = getPhoneNumber(context, id)
 
@@ -138,7 +137,7 @@ private fun getPhoneNumber(context: Context, id: String): Map<String, String?> {
     return result
 }
 
-private fun getNames(context: Context,id: String): Map<String, String?> {
+private fun getNames(context: Context, id: String): Map<String, String?> {
 
     val whereName = ContactsContract.Data.MIMETYPE + " = ?"
     val whereNameParams = arrayOf(ContactsContract.CommonDataKinds.StructuredName.CONTENT_ITEM_TYPE)
@@ -153,42 +152,25 @@ private fun getNames(context: Context,id: String): Map<String, String?> {
     val names = mutableMapOf<String, String?>()
 
     nameCur?.let {
-        Log.d("Main", it.toString())
-
         nameColumns[GIVEN_NAME] =
             nameCur.getColumnIndex(ContactsContract.CommonDataKinds.StructuredName.GIVEN_NAME)
         nameColumns[FAMILY_NAME] =
             nameCur.getColumnIndex(ContactsContract.CommonDataKinds.StructuredName.FAMILY_NAME)
         nameColumns[DISPLAY_NAME] =
             nameCur.getColumnIndex(ContactsContract.CommonDataKinds.StructuredName.DISPLAY_NAME)
-        nameCur.move(id.toInt())
+
+        try {
+            nameCur.move(id.toInt())
             names[GIVEN_NAME] = nameColumns[GIVEN_NAME]?.let { it1 -> nameCur.getString(it1) }
             names[FAMILY_NAME] = nameColumns[FAMILY_NAME]?.let { it1 -> nameCur.getString(it1) }
             names[DISPLAY_NAME] = nameColumns[DISPLAY_NAME]?.let { it1 -> nameCur.getString(it1) }
+        } catch (e: IndexOutOfBoundsException) {
+            nameCur.close()
+            return emptyMap()
+        }
 
     }
-    Log.d("Main", nameColumns.toString())
-    Log.d("Main", names.toString())
 
     nameCur?.close()
     return names
-}
-
-
-private fun checkPermissions(context: Context) {
-    if (ContextCompat.checkSelfPermission(
-            context,
-            Manifest.permission.READ_CONTACTS
-        ) != PackageManager.PERMISSION_GRANTED
-    ) {
-        //request permission
-        ActivityCompat.requestPermissions(
-            context as MainActivity,
-            arrayOf(Manifest.permission.READ_CONTACTS),
-            100
-        )
-    } /*else {
-        val contactList = getContactList(context)
-        Log.d("Main",contactList.toString())
-    }*/
 }

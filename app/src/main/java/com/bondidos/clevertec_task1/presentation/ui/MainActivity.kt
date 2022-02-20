@@ -1,22 +1,28 @@
-package com.bondidos.clevertec_task1.presentation
+package com.bondidos.clevertec_task1.presentation.ui
 
-import android.content.DialogInterface
+import android.Manifest
+import android.content.Context
+import android.content.pm.PackageManager
 import android.os.Bundle
-import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.bondidos.clevertec_task1.ExitFragment
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import com.bondidos.clevertec_task1.presentation.ui.fragments.dialogs.ExitFragment
 import com.bondidos.clevertec_task1.R
 import com.bondidos.clevertec_task1.domain.model.ItemModel
-import com.bondidos.clevertec_task1.presentation.fragments.DetailsFragment
-import com.bondidos.clevertec_task1.presentation.fragments.FirstFragment
-import com.bondidos.clevertec_task1.presentation.fragments.NumbersDialog
-import com.bondidos.clevertec_task1.presentation.fragments.StartScreen
-import com.bondidos.clevertec_task1.presentation.navigation.Navigation
+import com.bondidos.clevertec_task1.presentation.ui.fragments.detailsScreen.DetailsFragment
+import com.bondidos.clevertec_task1.presentation.ui.fragments.contactsScreen.FirstFragment
+import com.bondidos.clevertec_task1.presentation.ui.fragments.dialogs.NumbersDialog
+import com.bondidos.clevertec_task1.presentation.ui.fragments.startScreen.StartScreen
+import com.bondidos.clevertec_task1.presentation.ui.navigation.Navigation
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(R.layout.activity_main), Navigation {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        checkPermissions(this)
+    }
 
     override fun navigateFirstFragment() {
         supportFragmentManager
@@ -59,11 +65,29 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), Navigation {
 
     override fun onPowerBtnPush() = onBackPressed()
     override fun openListDialog(list: List<String?>) {
-       NumbersDialog(list).show(supportFragmentManager, "List")
+        NumbersDialog(list).show(supportFragmentManager, "List")
     }
 
     override fun onBackPressed() {
         ExitFragment()
             .show(supportFragmentManager, "Exit?")
+    }
+
+    private fun checkPermissions(context: Context) {
+        if (ContextCompat.checkSelfPermission(
+                context,
+                Manifest.permission.READ_CONTACTS
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            //request permission
+            ActivityCompat.requestPermissions(
+                context as MainActivity,
+                arrayOf(Manifest.permission.READ_CONTACTS),
+                100
+            )
+        } /*else {
+        val contactList = getContactList(context)
+        Log.d("Main",contactList.toString())
+    }*/
     }
 }

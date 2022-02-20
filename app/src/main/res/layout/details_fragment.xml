@@ -16,82 +16,100 @@
         app:navigationIcon="@drawable/baseline_arrow_back_black_24dp"
         app:title="@string/app_name" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/detailsImage"
-        android:layout_width="@dimen/detail_image_width"
-        android:layout_height="@dimen/detail_image_height"
-        android:background="@drawable/round_background"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolBar"
-        app:layout_constraintVertical_bias="0.086"
-        app:srcCompat="@drawable/baseline_perm_identity_black_24dp" />
-
-    <TextView
-        android:id="@+id/firstName"
-        style="@style/TextTitleStyle"
-        android:layout_marginTop="24dp"
-        android:text="FirstName"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
-        app:layout_constraintEnd_toEndOf="@+id/detailsImage"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="@+id/detailsImage"
-        app:layout_constraintTop_toBottomOf="@+id/detailsImage" />
-
-    <TextView
-        android:id="@+id/familyName"
-        style="@style/TextTitleStyle"
-        android:layout_marginTop="21dp"
-        android:text="FamilyName"
-        app:layout_constraintBottom_toTopOf="@+id/phoneNumber"
-        app:layout_constraintEnd_toEndOf="@+id/phoneNumber"
-        app:layout_constraintStart_toStartOf="@+id/phoneNumber"
-        app:layout_constraintTop_toBottomOf="@+id/firstName"
-        app:layout_constraintVertical_bias="0.0" />
-
     <ImageButton
         android:id="@+id/exitBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
         android:background="@color/purple_500"
+        android:contentDescription="@string/image"
         app:layout_constraintBottom_toBottomOf="@+id/toolBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/baseline_power_settings_new_black_24dp" />
+        app:srcCompat="@drawable/baseline_power_settings_new_black_24dp"
+        tools:ignore="TouchTargetSizeCheck,ImageContrastCheck" />
 
-    <Button
-        android:id="@+id/saveContact"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
-        android:text="SaveContact"
-        app:layout_constraintEnd_toEndOf="@+id/phoneNumber"
-        app:layout_constraintHorizontal_bias="0.481"
-        app:layout_constraintStart_toStartOf="@+id/phoneNumber"
-        app:layout_constraintTop_toBottomOf="@+id/phoneNumber" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/toolbar_height">
 
-    <TextView
-        android:id="@+id/email"
-        style="@style/TextDescriptionStyle"
-        android:text="Email"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/phoneNumber"
-        app:layout_constraintHorizontal_bias="0.521"
-        app:layout_constraintStart_toStartOf="@+id/phoneNumber"
-        app:layout_constraintTop_toBottomOf="@+id/phoneNumber"
-        app:layout_constraintVertical_bias="0.041" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolBar">
 
-    <TextView
-        android:id="@+id/phoneNumber"
-        style="@style/TextDescriptionStyle"
-        android:layout_marginTop="72dp"
-        android:text="Description"
-        app:layout_constraintEnd_toEndOf="@+id/firstName"
-        app:layout_constraintHorizontal_bias="0.461"
-        app:layout_constraintStart_toStartOf="@+id/firstName"
-        app:layout_constraintTop_toBottomOf="@+id/firstName" />
 
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/detailsImage"
+                android:layout_width="@dimen/detail_image_width"
+                android:layout_height="@dimen/detail_image_height"
+                android:background="@drawable/round_background"
+                app:layout_constraintBottom_toBottomOf="@+id/constraint"
+                app:layout_constraintEnd_toEndOf="@+id/constraint"
+                app:layout_constraintHorizontal_bias="0.495"
+                app:layout_constraintStart_toStartOf="@+id/constraint"
+                app:layout_constraintTop_toTopOf="@+id/constraint"
+                app:layout_constraintVertical_bias="0.086"
+                app:srcCompat="@drawable/baseline_perm_identity_black_24dp"
+                tools:ignore="ImageContrastCheck" />
+
+            <TextView
+                android:id="@+id/firstName"
+                style="@style/TextTitleStyle"
+                android:layout_marginTop="24dp"
+                android:text="FirstName"
+                app:layout_constraintBottom_toTopOf="@+id/textView2"
+                app:layout_constraintEnd_toEndOf="@+id/detailsImage"
+                app:layout_constraintHorizontal_bias="0.502"
+                app:layout_constraintStart_toStartOf="@+id/detailsImage"
+                app:layout_constraintTop_toBottomOf="@+id/detailsImage" />
+
+            <TextView
+                android:id="@+id/familyName"
+                style="@style/TextTitleStyle"
+                android:layout_marginTop="21dp"
+                android:text="FamilyName"
+                app:layout_constraintBottom_toTopOf="@+id/phoneNumber"
+                app:layout_constraintEnd_toEndOf="@+id/phoneNumber"
+                app:layout_constraintStart_toStartOf="@+id/phoneNumber"
+                app:layout_constraintTop_toBottomOf="@+id/firstName"
+                app:layout_constraintVertical_bias="0.0" />
+
+
+            <Button
+                android:id="@+id/saveContact"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="56dp"
+                android:text="SaveContact"
+                app:layout_constraintEnd_toEndOf="@+id/phoneNumber"
+                app:layout_constraintHorizontal_bias="0.481"
+                app:layout_constraintStart_toStartOf="@+id/phoneNumber"
+                app:layout_constraintTop_toBottomOf="@+id/phoneNumber" />
+
+            <TextView
+                android:id="@+id/email"
+                style="@style/TextDescriptionStyle"
+                android:text="Email"
+                app:layout_constraintBottom_toBottomOf="@+id/constraint"
+                app:layout_constraintEnd_toEndOf="@+id/phoneNumber"
+                app:layout_constraintHorizontal_bias="0.521"
+                app:layout_constraintStart_toStartOf="@+id/phoneNumber"
+                app:layout_constraintTop_toBottomOf="@+id/phoneNumber"
+                app:layout_constraintVertical_bias="0.041" />
+
+            <TextView
+                android:id="@+id/phoneNumber"
+                style="@style/TextDescriptionStyle"
+                android:layout_marginTop="72dp"
+                android:text="Description"
+                app:layout_constraintEnd_toEndOf="@+id/firstName"
+                app:layout_constraintHorizontal_bias="0.461"
+                app:layout_constraintStart_toStartOf="@+id/firstName"
+                app:layout_constraintTop_toBottomOf="@+id/firstName" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,13 +9,13 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.fragments.StartScreen">
+        tools:context=".presentation.ui.fragments.startScreen.StartScreen">
 
         <Button
             android:id="@+id/showFromSP"
             android:layout_width="@dimen/button_width"
             android:layout_height="wrap_content"
-            android:text="ShowFromSP"
+            android:text="@string/showfromsp"
             app:layout_constraintBottom_toTopOf="@+id/showNotification"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -26,7 +26,7 @@
             android:id="@+id/showContacts"
             android:layout_width="@dimen/button_width"
             android:layout_height="wrap_content"
-            android:text="showContacts"
+            android:text="@string/showcontacts"
             app:layout_constraintBottom_toTopOf="@+id/selectContact"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -38,7 +38,7 @@
             android:id="@+id/selectContact"
             android:layout_width="@dimen/button_width"
             android:layout_height="wrap_content"
-            android:text="selectContact"
+            android:text="@string/selectContact"
             app:layout_constraintBottom_toTopOf="@+id/showFromSP"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -48,7 +48,7 @@
             android:id="@+id/showNotification"
             android:layout_width="@dimen/button_width"
             android:layout_height="wrap_content"
-            android:text="showNotification"
+            android:text="@string/showNotification"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

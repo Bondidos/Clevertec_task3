@@ -1,8 +1,8 @@
-package com.bondidos.clevertec_task1.presentation.fragments.viewModel
+package com.bondidos.clevertec_task1.presentation.ui.fragments.detailsScreen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.bondidos.clevertec_task1.domain.SaveContactUseCase
+import com.bondidos.clevertec_task1.domain.usecases.SaveContactUseCase
 import com.bondidos.clevertec_task1.domain.model.ItemModel
 import com.bondidos.clevertec_task1.domain.state.IsSuccess
 import kotlinx.coroutines.Dispatchers
@@ -15,16 +15,16 @@ import javax.inject.Inject
 
 class DetailFragmentViewModel @Inject constructor(
     private val saveContact: SaveContactUseCase
-    ): ViewModel() {
+) : ViewModel() {
 
     private val _isAdded = MutableStateFlow<IsSuccess>(IsSuccess.Initialized)
     val isAdded: StateFlow<IsSuccess> = _isAdded.asStateFlow()
 
-    fun saveContact(item: ItemModel){
+    fun saveContact(item: ItemModel) {
         _isAdded.value = IsSuccess.Initialized
         viewModelScope.launch {
-            withContext(Dispatchers.IO){
-                 _isAdded.value = saveContact.execute(item)
+            withContext(Dispatchers.IO) {
+                _isAdded.value = saveContact.execute(item)
             }
         }
     }

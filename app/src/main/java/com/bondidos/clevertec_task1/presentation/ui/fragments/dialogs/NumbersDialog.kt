@@ -1,4 +1,4 @@
-package com.bondidos.clevertec_task1.presentation.fragments
+package com.bondidos.clevertec_task1.presentation.ui.fragments.dialogs
 
 import android.app.Dialog
 import android.content.Context
@@ -13,9 +13,9 @@ import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import java.lang.IllegalArgumentException
 
-class NumbersDialog constructor(private val list: List<String?>): DialogFragment() {
+class NumbersDialog constructor(private val list: List<String?>) : DialogFragment() {
 
-    private var coordinatorLayout : CoordinatorLayout? = null
+    private var coordinatorLayout: CoordinatorLayout? = null
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
 
@@ -24,7 +24,8 @@ class NumbersDialog constructor(private val list: List<String?>): DialogFragment
         return activity?.let {
             AlertDialog.Builder(it)
                 .setTitle("Pick a Number")
-                .setItems(list.toTypedArray()
+                .setItems(
+                    list.toTypedArray()
                 ) { _, which ->
                     val sharedPrefs =
                         activity?.getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE)
@@ -37,7 +38,7 @@ class NumbersDialog constructor(private val list: List<String?>): DialogFragment
                     coordinatorLayout?.let { it1 ->
                         Snackbar.make(
                             it1,
-                            list[which] ?: "",
+                            "Saving in SP " + list[which],
                             BaseTransientBottomBar.LENGTH_LONG
                         ).show()
                     }
