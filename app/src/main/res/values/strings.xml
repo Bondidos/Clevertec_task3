@@ -4,5 +4,10 @@
     <string name="are_you_sure_want_to_exit">Are you suew want to exit?</string>
     <string name="yes">yes</string>
     <string name="no">no</string>
-    <string name="element">element</string>
+    <string name="element" translatable="false">element</string>
+    <string name="image" translatable="false">Image</string>
+    <string name="showContacts" translatable="false">showContacts</string>
+    <string name="showFromSP" translatable="false">ShowFromSP</string>
+    <string name="selectContact" translatable="false">selectContact</string>
+    <string name="showNotification" translatable="false">showNotification</string>
 </resources>
