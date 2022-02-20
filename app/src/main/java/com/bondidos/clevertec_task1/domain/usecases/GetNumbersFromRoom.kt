@@ -6,8 +6,8 @@ import javax.inject.Inject
 class GetNumbersFromRoom @Inject constructor(private val dataBase: ContactsDao) {
     fun execute(): List<String?> {
         val data = dataBase.getSavedContacts()
-        return data.map {
-            it.number
-        }
+        return data
+            .filter { it.number != null && it.number.isNotEmpty() }
+            .map { it.number }
     }
 }

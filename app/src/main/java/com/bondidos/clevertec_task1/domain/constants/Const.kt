@@ -9,6 +9,6 @@ object Const {
     const val PHONE_NUMBER = "phone_number"
     const val PHOTO_URI = "photo_uri"
     const val EMAIL = "email"
-
+    const val SHARED_PREFS = "SharedPrefs"
 
 }

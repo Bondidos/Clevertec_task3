@@ -5,7 +5,7 @@ import com.bondidos.clevertec_task1.domain.model.ItemModel
 import com.bondidos.clevertec_task1.domain.usecases.GetContactsUseCase
 import javax.inject.Inject
 
-class FirstFragmentViewModel @Inject constructor (private val getContacts: GetContactsUseCase): ViewModel() {
+class FirstFragmentViewModel @Inject constructor (getContacts: GetContactsUseCase): ViewModel() {
 
     private var itemList : List<ItemModel>? = null
 
